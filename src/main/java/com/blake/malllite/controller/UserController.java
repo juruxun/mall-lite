@@ -1,5 +1,6 @@
 package com.blake.malllite.controller;
 
+import com.blake.malllite.common.Result;
 import com.blake.malllite.entity.User;
 import com.blake.malllite.service.UserService;
 import jakarta.annotation.Resource;
@@ -17,7 +18,10 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/list")
-    public List<User> list(){
+    public Result<List<User>> listUsers(){
         return userService.listUsers();
     }
+
+
+
 }
