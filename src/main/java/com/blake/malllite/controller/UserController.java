@@ -28,4 +28,8 @@ public class UserController {
         return null;
     }
 
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
 }
