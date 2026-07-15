@@ -7,7 +7,7 @@ public class JWTTest {
     public static void main(String[] args) {
         String token = JwtUtil.generateToken(1L,"admin");
         Claims claims = JwtUtil.parseToken(token);
-        System.out.println(claims.get("userid"));
+        System.out.println(claims.get("userId"));
         System.out.println(claims.get("username"));
         System.out.println(token);
 

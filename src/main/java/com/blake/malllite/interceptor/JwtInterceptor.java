@@ -1,5 +1,6 @@
 package com.blake.malllite.interceptor;
 
+import com.blake.malllite.common.UserHolder;
 import com.blake.malllite.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,18 +17,42 @@ public class JwtInterceptor implements HandlerInterceptor {
     String token = request.getHeader("Authorization");
 
     //判断token是否存在
-        if (token.startsWith("Bearer")){
-            token = token.substring(7);
+        if(token == null){
+            response.setStatus(401);
+            return false;
         }
-     try {
+
+        if(!token.startsWith("Bearer ")){
+            response.setStatus(401);
+            return false;
+        }
+        token=token.substring(7);
+
+        try {
          //解析token
          Claims claims = JwtUtil.parseToken(token);
-         System.out.println(claims);
+        //获取用户Id
+         Long userId=claims.get("userId", Long.class);
+         //保存用户信息
+         UserHolder.saveUser(userId);
          return  true;
      }catch (Exception e){
-         response.setStatus(401);
+            e.printStackTrace();
+            response.setStatus(401);
+            response.setContentType("application/json;charset=UTF-8");
+            response.getWriter().write("{\"code\":401,\"message\":\"Token无效\"}");
+
          return false;
      }
 
     }
+    @Override
+    public void afterCompletion(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Object handler,
+            Exception ex){
+        UserHolder.remove();
+    }
+
 }

@@ -29,6 +29,11 @@ public class Result<T> {
                 data
         );
     }
+    public static <T> Result<T> error(Integer code, String message){
+        return new Result<>(code,message,null);
+
+    }
+
 
     public static <T> Result<T> failed (String message){
         return new Result<>(
