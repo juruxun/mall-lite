@@ -125,7 +125,6 @@ public class ProductServiceImpl implements ProductService {
         if (product==null){
             throw new RuntimeException("商品不存在");
         }
-        int i = productMapper.deleteById(id);
         int result = productMapper.deleteById(id);
 
         if(result==0){
