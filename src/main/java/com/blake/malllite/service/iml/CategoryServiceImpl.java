@@ -64,7 +64,7 @@ public class CategoryServiceImpl implements CategoryService {
         LambdaQueryWrapper<Category> wrapper =new LambdaQueryWrapper<>();
         wrapper.eq(Category::getName,dto.getName());
         wrapper.ne(Category::getId,dto.getId());
-
+        //查询同名数据+排除自己
         Category existCategory =
                 categoryMapper.selectOne(wrapper);
         if(existCategory != null){

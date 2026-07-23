@@ -20,7 +20,7 @@ public class ProductController {
     @Resource
     private ProductService productService;
 
-    @GetMapping("list")
+    @GetMapping("/list")
     public Result<List<Product>> listProduct(){
         return productService.listProducts();
     }

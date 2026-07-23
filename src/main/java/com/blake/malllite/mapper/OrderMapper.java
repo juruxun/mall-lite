@@ -1,9 +1,9 @@
 package com.blake.malllite.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.blake.malllite.entity.Cart;
+import com.blake.malllite.entity.Order;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface CartMapper extends BaseMapper<Cart> {
+public interface OrderMapper extends BaseMapper<Order> {
 }

@@ -6,6 +6,7 @@ import com.blake.malllite.dto.CartUpdateDto;
 import com.blake.malllite.entity.Cart;
 import com.blake.malllite.service.CartService;
 import com.blake.malllite.vo.CartDetailVo;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/cart")
 public class CartController{
+    @Resource
     private CartService cartService;
     @PostMapping
     public Result<Void> addCart(@RequestBody CartAddDto addDto){

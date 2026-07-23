@@ -29,10 +29,8 @@ public class CartServiceImpl implements CartService {
     @Override
     public void addCart(CartAddDto cartAddDto) {
         Long userID= UserHolder.getUser();
-
         Product product = productMapper.selectById(cartAddDto.getProductId());
         if (product==null){
-
              throw  new RuntimeException("商品不存在");
         }
         /*
@@ -52,16 +50,15 @@ public class CartServiceImpl implements CartService {
         //判断购物车（cart）是否存在
         if (cart!=null){
             cart.setQuantity(cart.getQuantity()+cartAddDto.getQuantity());
+            cartMapper.updateById(cart);
+        }else {
+
+            Cart newCart = new Cart();
+            newCart.setUserId(userID);
+            newCart.setProductId(cartAddDto.getProductId());
+            newCart.setQuantity(cartAddDto.getQuantity());
+            cartMapper.insert(newCart);
         }
-        cartMapper.updateById(cart);
-        Cart newCart = new Cart();
-        newCart.setUserId(userID);
-        newCart.setProductId(cartAddDto.getProductId());
-        newCart.setQuantity(cartAddDto.getQuantity());
-        cartMapper.insert(newCart);
-
-
-
     }
 
     @Override
